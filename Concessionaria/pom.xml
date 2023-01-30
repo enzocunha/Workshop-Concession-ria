@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Concessionaria</artifactId>
+	<artifactId>ProjetoEntityBD</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ProjetoEntityBD</name>
 	<description>Demo project for Spring Boot</description>
@@ -41,8 +41,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	
-		
 	</dependencies>
 
 	<build>

@@ -47,31 +47,31 @@ public class CarroController {
     {
         return carroRepository.save(carro);
     }    
-    
-    @RequestMapping(value = "/carro/{id}", method =  RequestMethod.PUT)
-    public ResponseEntity<Carro> Put(@PathVariable(value = "id") long id, @RequestBody Carro newCarro)
-    {
-        Optional<Carro> oldCarro = carroRepository.findById(id);
-        if(oldCarro.isPresent()){
-            Carro carro = oldCarro.get();
-            carro.setNome(newCarro.getNome());
-            carroRepository.save(carro);
-            return new ResponseEntity<Carro>(carro, HttpStatus.OK);
-        }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }    
-    
-    @RequestMapping(value = "/carro/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id)
-    {
-        Optional<Carro> carro = carroRepository.findById(id);
-        if(carro.isPresent()){
-            carroRepository.delete(carro.get());
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }    
+//    
+//    @RequestMapping(value = "/pessoa/{id}", method =  RequestMethod.PUT)
+//    public ResponseEntity<Pessoa> Put(@PathVariable(value = "id") long id, @RequestBody Pessoa newPessoa)
+//    {
+//        Optional<Pessoa> oldPessoa = carroRepository.findById(id);
+//        if(oldPessoa.isPresent()){
+//            Pessoa pessoa = oldPessoa.get();
+//            pessoa.setNome(newPessoa.getNome());
+//            carroRepository.save(pessoa);
+//            return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
+//        }
+//        else
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }    
+//    
+//    @RequestMapping(value = "/pessoa/{id}", method = RequestMethod.DELETE)
+//    public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id)
+//    {
+//        Optional<Pessoa> pessoa = carroRepository.findById(id);
+//        if(pessoa.isPresent()){
+//            carroRepository.delete(pessoa.get());
+//            return new ResponseEntity<>(HttpStatus.OK);
+//        }
+//        else
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }    
     
 }	
