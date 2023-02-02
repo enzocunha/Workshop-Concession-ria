@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Carro
@@ -14,15 +16,19 @@ public class Carro
     private long id;
 
     @Column(nullable = false)
+    @NotEmpty(message="Informe a marca.")
     private String marca;
     
-    @Column(nullable = false)    
+    @Column(nullable = false) 
+    @NotEmpty(message="Informe o modelo.")
     private String modelo;
     
     @Column(nullable = false)
+    @Min(value=1900, message="Informe um ano válido")
     private long ano;
     
     @Column(nullable = false)
+    @NotEmpty(message="Informe a cor.")
     private String cor;
 
     public String getMarca() {
