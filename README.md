@@ -1,0 +1,3 @@
+Ignore o teste.txt
+
+
