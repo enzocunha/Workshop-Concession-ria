@@ -7,62 +7,61 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Funcionarios
+public class Cliente
+/*Os campos não obrigatórios são cnh e email*/
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(nullable = false)
+    @NotEmpty(message = "O CPF do cliente deve ser informado")
+    @CPF(message = "CPF inválido")
     private String cpf;
     
-    @Column(nullable = false)    
+    @Column(nullable = false)
+    @NotEmpty(message = "O nome do cliente deve ser informado")
+    @Length(min = 5, max = 100, message = "O nome deverá ter entre 5 e 100 caracteres")
     private String nome;
     
     @Column(nullable = false)
+    @NotNull(message = "A data de nascimento do cliente deve ser informado")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date data_nasc;
+     
     
     @Column(nullable = false)
-    private String cargo;
-    
-    @Column(nullable = false)
+    @NotEmpty(message = "O cep do cliente deve ser informado")
+    @Length(min = 9, max = 9, message = "Deve seguir o seguinte formato XXXX-XXX")
     private String cep;
+   
     
     @Column(nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date data_contratacao;
-    
-    @Column
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date data_demissao;
-    
-    @Column(nullable = false)
+    @NotEmpty(message = "O telefone do cliente deve ser informado")
+    @Length(min = 14 , max = 14, message = "Deve seguir o formato (XX)XXXXX-XXXX")
     private String telefone;
-    
-    @Column(nullable = false)
-    private String supervisor;
-    
-    @Column(nullable = false)
-    private Double salario;
-    
-    public void setSalario(Double salario) {
-		this.salario = salario;
-	}
 
-	@Column(nullable = false)
-    private String sexo;
     
-    @Column(nullable = false)
-    private String pis;
-    
+	@Column
+    private char sexo;
+	
+	@Column
+	private String cnh;
+	  
     @Column
+    @Email(message = "E-mail inválido")
     private String email;
+    /* Métodos GET e SET*/
 
 	public long getId() {
 		return id;
@@ -96,36 +95,12 @@ public class Funcionarios
 		this.data_nasc = data_nasc;
 	}
 
-	public String getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
-
 	public String getCep() {
 		return cep;
 	}
 
 	public void setCep(String cep) {
 		this.cep = cep;
-	}
-
-	public Date getData_contratacao() {
-		return data_contratacao;
-	}
-
-	public void setData_contratacao(Date data_contratacao) {
-		this.data_contratacao = data_contratacao;
-	}
-
-	public Date getData_demissao() {
-		return data_demissao;
-	}
-
-	public void setData_demissao(Date data_demissao) {
-		this.data_demissao = data_demissao;
 	}
 
 	public String getTelefone() {
@@ -136,34 +111,15 @@ public class Funcionarios
 		this.telefone = telefone;
 	}
 
-	public String getSupervisor() {
-		return supervisor;
-	}
-
-	public void setSupervisor(String supervisor) {
-		this.supervisor = supervisor;
-	}
-
-	public Double getSalario() {
-		return salario;
-	}
-
-	public String getSexo() {
+	public char getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(String sexo) {
+	public void setSexo(char sexo) {
 		this.sexo = sexo;
 	}
 
-	public String getPis() {
-		return pis;
-	}
-
-	public void setPis(String pis) {
-		this.pis = pis;
-	}
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -171,5 +127,14 @@ public class Funcionarios
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getCnh() {
+		return cnh;
+	}
+
+	public void setCnh(String cnh) {
+		this.cnh = cnh;
+	}
     
+	
 }
