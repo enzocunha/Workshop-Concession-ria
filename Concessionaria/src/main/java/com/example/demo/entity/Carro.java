@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Carro
@@ -30,8 +31,20 @@ public class Carro
     @Column(nullable = false)
     @NotEmpty(message="Informe a cor.")
     private String cor;
+    
+    @Column(nullable = false)
+    @NotNull(message = "Informe o preço.")
+    private Double preco;
 
-    public String getMarca() {
+    public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public String getMarca() {
 		return marca;
 	}
 

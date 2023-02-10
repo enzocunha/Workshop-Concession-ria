@@ -77,6 +77,7 @@ public class CarroController {
             carro.setCor(newCarro.getCor());
             carro.setMarca(newCarro.getMarca());
             carro.setModelo(newCarro.getModelo());
+            carro.setPreco(newCarro.getPreco());
             response.setData(carro);
             carroRepository.save(carro);
             return ResponseEntity.ok(response);
