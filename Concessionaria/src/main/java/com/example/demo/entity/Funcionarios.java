@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,23 +23,32 @@ public class Funcionarios
     private long id;
 
     @Column(nullable = false)
+    @NotEmpty(message = "O CPF do funcionário deve ser informado.")
+    @CPF(message = "CPF inválido")
     private String cpf;
     
-    @Column(nullable = false)    
+    @Column(nullable = false)
+    @NotEmpty(message = "O nome do funcionário deve ser informado")
+    @Length(min = 5, max = 100, message = "O nome deverá ter entre 5 e 200 caracteres")
     private String nome;
     
     @Column(nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd")
+    @NotNull(message = "A data de nascimento do funcionário deve ser informado")
     private Date data_nasc;
     
     @Column(nullable = false)
+    @NotNull(message = "O cargo do funcionário deve ser informado.")
     private String cargo;
     
     @Column(nullable = false)
+    @NotEmpty(message = "O cep do funcionário deve ser informado")
+    @Length(min = 9, max = 9, message = "Deve seguir o seguinte formato XXXX-XXX")
     private String cep;
     
     @Column(nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd")
+    @NotNull(message = "A data de contratação do funcionário deve ser informado")
     private Date data_contratacao;
     
     @Column
@@ -43,12 +56,15 @@ public class Funcionarios
     private Date data_demissao;
     
     @Column(nullable = false)
+    @Length(min = 14 , max = 14, message = "Deve seguir o formato (XX)XXXXX-XXXX")
     private String telefone;
     
     @Column(nullable = false)
+    @NotNull(message = "O nome do supervisor deve ser informado.")
     private String supervisor;
     
     @Column(nullable = false)
+    @NotNull(message = "O salário do funcionário deve ser informado.")
     private Double salario;
     
     public void setSalario(Double salario) {
