@@ -174,7 +174,7 @@ curl_close($curl);
     </main>
     <?php
     if (!empty($_POST) && isset($_POST['acao'])) {
-        /* if(!empty($_POST['ano']) || !empty($_POST['cor']) || !empty($_POST['marca']) || !empty($_POST['modelo']) || !empty($_POST['preco'])|| !empty($_POST['carro-id'])){
+        if (empty($_POST['cor']) and empty($_POST['marca']) and empty($_POST['modelo']) and empty($_POST['preco']) and empty($_POST['carro-id'])) {
             echo '</br>
         <div class="col-xl-6 col-lg-6 col-md-6 m-auto">
                               <div class="container-fluid">
@@ -185,24 +185,24 @@ curl_close($curl);
                                    </div>
                               </div>
                          </div>';
-        } else {*/
-        $url = 'localhost:8080/carro/' . $_POST['carro-id'];
-        $cabecalho = array('Content-Type: application/json', 'Accept: application/json');
-        $campos = json_encode(array('ano' => $_POST['ano'], 'cor' => $_POST['cor'], 'marca' => $_POST['marca'], 'modelo' => $_POST['modelo'], 'preco' => $_POST['preco']));
+        } else {
+            $url = 'localhost:8080/carro/' . $_POST['carro-id'];
+            $cabecalho = array('Content-Type: application/json', 'Accept: application/json');
+            $campos = json_encode(array('ano' => $_POST['ano'], 'cor' => $_POST['cor'], 'marca' => $_POST['marca'], 'modelo' => $_POST['modelo'], 'preco' => $_POST['preco']));
 
-        $ch = curl_init();
+            $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $cabecalho);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $campos);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-        $resposta = json_decode(curl_exec($ch), true);
-        curl_close($ch);
-        if (sizeof($resposta['errors']) == 0) {
-            echo '</br>
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $cabecalho);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $campos);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+            $resposta = json_decode(curl_exec($ch), true);
+            curl_close($ch);
+            if (sizeof($resposta['errors']) == 0) {
+                echo '</br>
                         <div class="col-xl-6 col-lg-6 col-md-6 m-auto">
                               <div class="container-fluid">
                                    <div class="row">
@@ -212,23 +212,24 @@ curl_close($curl);
                                    </div>
                               </div>
                          </div>';
-        } else {
-            
+            } else {
+
                 echo '</br>
                         <div class="col-xl-6 col-lg-6 col-md-6 m-auto">
                               <div class="container-fluid">
                                    <div class="row">
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
                                              <div class="alert alert-danger"><center>';
-                                             for ($i = 0; $i < sizeof($resposta["errors"]); $i++) { 
-                                                echo $resposta["errors"][$i]; 
-                                                echo '</br>';
-                                             }
+                for ($i = 0; $i < sizeof($resposta["errors"]); $i++) {
+                    echo $resposta["errors"][$i];
+                    echo '</br>';
+                }
                 echo '</center></div>
                                         </div>
                                    </div>
                               </div>
                          </div>';
+            }
         }
     }
 
